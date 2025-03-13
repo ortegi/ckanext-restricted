@@ -11,7 +11,13 @@
     {{ super() }}
   {% else %}
   <span class="restricted-item">
-    <a class="heading restricted-item" disabled="true" href="#" title="{{ res.name or res.description }}">{{ h.resource_display_name(res) | truncate(35) }} {{ _('Unauthorized') }} <span class="format-label" property="dc:format" data-format="{{ res.format.lower() or 'data' }}">{{ res.format }}</span>{{ h.popular('views', res.tracking_summary.total, min=10) }}</a></span>
+    <a class="heading restricted-item" disabled="true" href="#" title="{{ res.name or res.description }}">{{ h.resource_display_name(res) | truncate(35) }} {{ _('Unauthorized') }} 
+      <span class="format-label" property="dc:format" data-format="{{ res.format.lower() or 'data' }}">
+        {{ res.format }}</span>
+      
+    </a>
+  </span>
+
   {% endif %}
 {% endblock %}
 

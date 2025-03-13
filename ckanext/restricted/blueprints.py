@@ -15,7 +15,7 @@ import os
 import simplejson as json
 
 from flask import Blueprint, request, render_template
-
+from flask import g
 
 from logging import getLogger
 
@@ -46,9 +46,12 @@ def restricted_request_access_form(package_id, resource_id, data=None, errors=No
     try:
         context = {'model': model, "session": model.Session,
                    'user': g.user,
-                   'auth_user_obj': base.c.userobj}
-        logic.check_access('site_read', context)
+                   'auth_user_obj': g.userobj}
+       
+        #logic.check_access('site_read', context)
+        ##Here i got an error, because site_read function is not found anywhere
     except logic.NotAuthorized:
+        #who shouldn't see this page?
         base.abort(401, _('Not authorized to see this page'))
 
     user_id = g.user
